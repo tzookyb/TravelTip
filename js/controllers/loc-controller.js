@@ -11,7 +11,7 @@ export function renderLocationTable() {
             return `
             <li>
             <h4>${location.name}</h4>
-            <p>${location.createdAt}</p>
+            <p>${locService.getHumanTime(location.createdAt)}</p>
             <button data-id="${location.id}">Go</button>
             <button data-id="${location.id}">Remove</button>
             </li>
