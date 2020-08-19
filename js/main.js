@@ -48,4 +48,7 @@ function addEventListeners() {
             }
         }
     }
+
+    // EVENT FOR SEARCH BUTTON
+    document.querySelector('.go-btn').onclick = () => {mapController.onSearchLocation()};
 }

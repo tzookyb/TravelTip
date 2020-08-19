@@ -5,6 +5,7 @@ export const mapController = {
     addMarker,
     panTo,
     renderLocationTable,
+    onSearchLocation,
 }
 
 var map;
@@ -59,7 +60,7 @@ function renderLocationTable() {
             return `
             <li>
             <h4>${location.name}</h4>
-            <p>Created at: </p>
+            <p>Created at: ${convertToHumanTime(location.createdAt)}</p>
             <button data-id="${location.id}">Go</button>
             <button data-id="${location.id}">Remove</button>
             </li>
@@ -70,13 +71,22 @@ function renderLocationTable() {
 }
 
 function convertToHumanTime(timestamp) {
-    console.log(timestamp);
-    return `${timestamp.getHours()}`
-    // :${timestamp.getMinutes()} ${timestamp.getDate()}/${timestamp.getMonth() + 1}/${timestamp.getFullYear()})`;
+    const d = new Date(timestamp);
+    return `${d.getHours()}:${d.getMinutes()} ${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()})`;
 }
 
 function onAddPlace(latLng) {
     mapService.addPlace(latLng)
 
 
+}
+
+function onSearchLocation() {
+    const location = document.querySelector('.search-bar input').value;
+    mapService.geocodeSearch(location)
+        .then(location => {
+            console.log(location);
+            panTo(location.lat, location.lng)
+        })
+        .catch((error) => console.log('search error:', error));
 }

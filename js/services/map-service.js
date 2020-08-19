@@ -5,8 +5,10 @@ export const mapService = {
     getLocationById,
     removeLocation,
     addPlace,
+    geocodeSearch,
 }
 
+const API_KEY = 'AIzaSyDd9KipmgPk6pAvx9HUICBglcd27bt-KlU';
 var locs = [createLocation('stav', 10, 15), createLocation('Idan', 122, 15)]
 
 function getLocs() {
@@ -22,8 +24,8 @@ function addPlace(pos) {
     let location = createLocation(name, pos.lat(), pos.lng())
     locs.push(location)
     console.log("addPlace -> locs", locs)
-    
-     
+
+
 }
 
 export function getPosition() {
@@ -79,4 +81,16 @@ function removeLocation(id) {
         }
     }
     )
+}
+
+function geocodeSearch(location) {
+    return new Promise((resolve) => {
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(location)}&key=${API_KEY}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                resolve(data.results[0].geometry.location);
+            }
+            )
+    })
 }
