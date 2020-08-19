@@ -6,16 +6,16 @@ export const mapService = {
 var map;
 
 export function initMap(lat = 32.0749831, lng = 34.9120554) {
-    console.log('InitMap');
+    // console.log('InitMap');
     return _connectGoogleApi()
         .then(() => {
-            console.log('google available');
+            // console.log('google available');
             map = new google.maps.Map(
                 document.querySelector('#map'), {
                 center: { lat, lng },
                 zoom: 15
             })
-            console.log('Map!', map);
+            // console.log('Map!', map);
         })
 }
 

@@ -3,7 +3,7 @@ import { mapService } from './services/map.service.js'
 import {locController} from './controllers/loc-controller.js'
 
 locService.getLocs()
-    .then(locs => console.log('locs', locs))
+    // .then(locs => console.log('locs', locs))
 
 window.onload = () => {
     
@@ -11,10 +11,9 @@ window.onload = () => {
 
     mapService.initMap()
         .then(() => {
-
             mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
         })
-        .catch(console.log('INIT MAP ERROR'));
+        // .catch(console.log('INIT MAP ERROR'));
 
     // locService.getPosition()
     //     .then(pos => {
