@@ -5,6 +5,7 @@ export const mapController = {
     addMarker,
     panTo,
     renderLocationTable,
+    removeMarker,
 }
 
 var map;
@@ -84,8 +85,14 @@ function convertToHumanTime(timestamp) {
     // :${timestamp.getMinutes()} ${timestamp.getDate()}/${timestamp.getMonth() + 1}/${timestamp.getFullYear()})`;
 }
 
-function onAddPlace(latLng) {
-    mapService.addPlace(latLng)
+function onAddPlace(latLng, marker) {
+    mapService.addPlace(latLng, marker)
+    renderLocationTable()
+}
 
 
+function removeMarker(id){
+    const currLoc = mapService.getLoc(id)
+    currLoc.marker.setMap(null)
+    
 }

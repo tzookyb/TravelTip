@@ -5,9 +5,10 @@ export const mapService = {
     getLocationById,
     removeLocation,
     addPlace,
+    getLoc
 }
-
-var locs = [createLocation('stav', 10, 15), createLocation('Idan', 122, 15)]
+// createLocation('stav', 10, 15), createLocation('Idan', 122, 15)
+var locs = []
 
 function getLocs() {
     return new Promise((resolve, reject) => {
@@ -22,6 +23,7 @@ function addPlace(pos, marker) {
     let location = createLocation(name, pos.lat(), pos.lng(), marker)
     locs.push(location)
     console.log("addPlace -> locs", locs)
+    
     
      
 }
@@ -80,4 +82,12 @@ function removeLocation(id) {
         }
     }
     )
+}
+
+
+function getLoc(id) {
+    const loc = locs.find(location => {
+        return location.id === id;
+    })
+    return loc
 }

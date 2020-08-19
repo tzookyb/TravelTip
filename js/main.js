@@ -8,7 +8,7 @@ window.onload = () => {
 
     mapController.initMap()
         .then(() => {
-            var mark = mapController.addMarker({ lat: 32.0749831, lng: 34.9120554 });
+            mapController.addMarker({ lat: 32.0749831, lng: 34.9120554 });
         })
 
     addEventListeners()
@@ -38,8 +38,10 @@ function addEventListeners() {
                     })
             }
             else if (btn.innerText === 'Remove') {
+                mapController.removeMarker(btn.dataset.id)
+
                 mapService.removeLocation(btn.dataset.id)
-                    .then(mapController.renderLocationTable())
+                    .then(mapController.renderLocationTable)
                     .catch((error) => {
                         console.log('unable to delete location', error)
                     }
