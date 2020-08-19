@@ -33,7 +33,8 @@ function addEventListeners() {
             if (btn.innerText === 'Go') {
                 mapService.getLocationById(btn.dataset.id)
                     .then((location) => {
-                        mapController.panTo(location.lat, location.lng);
+                        mapController.panTo(location.lat, location.lng)
+                            .then()
                     })
             }
             else if (btn.innerText === 'Remove') {
@@ -51,6 +52,9 @@ function addEventListeners() {
 
     // EVENT FOR SEARCH BUTTON
     document.querySelector('.go-btn').onclick = () => { mapController.onSearchLocation() };
+
+    // EVENT FOR COPY TO URL BUTTON
+    document.querySelector('.copy-url').onclick = () => { mapController.copyUrlToClipboard() };
 }
 
 

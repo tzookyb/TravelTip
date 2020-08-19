@@ -8,11 +8,12 @@ export const mapController = {
     onSearchLocation,
     removeMarker,
     checkURLQuery,
+    copyUrlToClipboard,
 }
 
 var markers = []
 var map;
-
+var currLocation;
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
     return _connectGoogleApi()
@@ -46,6 +47,7 @@ function addMarker(loc) {
 }
 
 function panTo(lat, lng) {
+    currLocation = { lat: lat, lng: lng };
     var laLatLng = new google.maps.LatLng(lat, lng);
     map.panTo(laLatLng);
 }
@@ -89,6 +91,13 @@ function convertToHumanTime(timestamp) {
 function onAddPlace(latLng, marker, isFromSearch = false) {
     mapService.addPlace(latLng, marker, isFromSearch)
         .then(renderLocationTable());
+    let location;
+    if (isFromSearch) {
+        location = { lat: latLng.lat, lng: latLng.lng };
+    } else {
+        location = { lat: latLng.lat(), lng: latLng.lng() }
+    }
+    panTo(location.lat, location.lng);
 }
 
 function onSearchLocation() {
@@ -113,7 +122,6 @@ function removeMarker(id) {
 }
 
 function checkURLQuery() {
-    // window.location.href
     const urlParams = new URLSearchParams(window.location.search);
     const lat = urlParams.get('lat');
     const lng = urlParams.get('lng');
@@ -122,4 +130,12 @@ function checkURLQuery() {
     }
 }
 
-
+function copyUrlToClipboard() {
+    const Url = `${window.location.href}?lat=${currLocation.lat}&lng=${currLocation.lng}`;
+    const elem = document.createElement('textarea');
+    elem.value = Url;
+    document.body.appendChild(elem);
+    elem.select();
+    document.execCommand('copy');
+    document.body.removeChild(elem);
+}
