@@ -1,4 +1,4 @@
-import { locService } from '../services/loc.service';
+import { locService } from '../services/loc.service.js';
 
 export const locController = {
     renderLocationTable,
