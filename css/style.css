@@ -5,4 +5,111 @@
 body {
     margin: 0;
     text-align: center;
+    font-family: 'Snippet', sans-serif;
+    /* font-family: 'Khand', sans-serif; */
+    background-color: #086972;
+    color: #87dfd6;
+}
+
+.screen {
+    visibility: hidden;
+    position: fixed;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(8, 105, 114, 0.4);
+    opacity: 0;
+}
+
+.page-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    max-height: 80px;
+    flex-grow: 2;
+    color: #fbfd8a;
+}
+
+ul {
+    list-style: none;
+    padding: 10px;
+}
+
+li {
+    text-align: left;
+}
+
+li h4 {
+    display: inline-block;
+    padding: 5px;
+    margin: 0;
+}
+
+li p {
+    display: inline-block;
+    margin: 0;
+}
+
+main {
+    flex-grow: 8;
+    display: flex;
+    flex-direction: column;
+}
+
+.location-table {
+    position: fixed;
+    transform: translateX(-110%);
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 45vw;
+    text-decoration: underline;
+    text-align: left;
+    color: #086972;
+    background-color: #fbfd8a;
+    height: 100vh;
+    margin: 0;
+    padding: 20px;
+    opacity: 0;
+    transition: 1s;
+    box-shadow: 50px 0px 50px #086972;
+}
+
+.showlist {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+}
+
+.show {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+h1 {}
+
+button {}
+
+.marker-title {}
+
+.search-bar {}
+
+.map-container {
+    height: 100%;
+    margin-top: 25px;
+}
+
+#map {
+    height: 100%;
+}
+
+footer {
+    max-height: 40px;
+    flex-grow: 1;
+    background-color: #01a9b4;
+    color: #fbfd8a;
 }

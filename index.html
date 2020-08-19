@@ -5,48 +5,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Snippet&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Khand&display=swap" rel="stylesheet">
     <title>TravelTip</title>
 </head>
 
 <body>
-    <!-- Header -->
-    <header>
-        <h1>TipTravel - Map and Experiences</h1>
-    </header>
+    <div class="page-container">
+        <div class="screen"></div>
+        <!-- Header -->
+        <header>
+            <h1>TipTravel - Map and Experiences</h1>
+        </header>
 
-    <!-- Main -->
-    <main>
-        <div class="search-bar">
-            <input type="text" placeholder="Enter location" />
-            <button class="go-btn">GO</button>
-            <button class="my-location">My Location</button>
-        </div>
+        <!-- Main -->
+        <main>
+            <button class="showlist">Show List</button>
+            <div class="location-table">
+                <h2>Your saved locations:</h2>
+                <ul>
+                    <h3>Please wait while loading location table...</h3>
+                </ul>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Enter location" />
+                <button class="go-btn">GO</button>
+                <button class="my-location">My Location</button>
+            </div>
 
-        <div class="div">
-            <h2 class="marker-title">Shows selected location</h2>
-            <button class="copy-url">Copy Location</button>
-        </div>
+            <div class="div">
+                <h2 class="marker-title">Shows selected location</h2>
+                <button class="copy-url">Copy Location</button>
+            </div>
 
-        <div class="location-table">
-            <ul>
-                <h3>Please wait while loading location table...</h3>
-            </ul>
-        </div>
+            <!-- MAP -->
+            <div class="map-container">
+                <div id="map" style="width: 100%;"></div>
 
-        <!-- MAP -->
-        <div id="map" style="width: 100%; height: 400px;"></div>
-        <!-- <button class="btn">Click Me</button> -->
+            </div>
 
-        <!-- WEATHER -->
-        <div class="weather-box">
 
-        </div>
-    </main>
-    <!-- Footer -->
-    <footer>
-        coffeerights 2020&copy Idan & Stav
-    </footer>
 
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            coffeerights 2020&copy Idan & Stav
+        </footer>
+    </div>
     <script type="module" src="js/main.js"></script>
 </body>
 
