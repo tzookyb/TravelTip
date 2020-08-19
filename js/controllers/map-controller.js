@@ -7,6 +7,7 @@ export const mapController = {
     renderLocationTable,
     onSearchLocation,
     removeMarker,
+    checkURLQuery,
 }
 
 var map;
@@ -18,7 +19,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             map = new google.maps.Map(
                 document.querySelector('#map'), {
                 center: { lat, lng },
-                zoom: 15
+                zoom: 10
             })
 
             map.addListener('click', event => {
@@ -109,4 +110,14 @@ function removeMarker(id) {
         .then(currLoc => {
             currLoc.marker.setMap(null)
         });
+}
+
+function checkURLQuery() {
+    // window.location.href
+    const urlParams = new URLSearchParams(window.location.search);
+    const lat = urlParams.get('lat');
+    const lng = urlParams.get('lng');
+    if (lat && lng) {
+        panTo(lat, lng);
+    }
 }
