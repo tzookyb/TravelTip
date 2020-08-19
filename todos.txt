@@ -1,0 +1,33 @@
+loc-service:       (key for storage - "LOC")
+
+1) function createLocation - creates new location object
+{id, name, lat, lng, weather, createdAt, updatedAt}
+*render the location to the table. (GO btn, DELETE btn *dataset)
+
+V 2) connect getPosition function to button.
+make the map represent user location. pan+zoom
+
+3) later - if url query provided - onload pan+zoom to location
+else pan+zoom to user location.
+
+4) Search - go to google api - get search location, pan+zoom to location
+and save to location table.
+
+5) copy location - gets the current marker location, translate it to url query.
+
+V 6) localstorage - load places from storage onload.
+
+
+
+
+*** Design
+
+
+Stav:
+1)URL query
+2)createLocation
+3)
+
+Idan:
+1)Geolocation
+2)render Locations on table

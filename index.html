@@ -1,15 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
     <title>ES6</title>
 </head>
+
 <body>
-    <h1>ES6 and stav & idan</h1>
-    <div id="map" style="width: 100%; height: 400px;"></div>
-    <button class="btn">Click Me</button>
-    
+    <!-- Header -->
+    <header>
+        <h1>TipTravel - Map and Experiences</h1>
+    </header>
+
+    <!-- Main -->
+    <main>
+        <div class="search-bar">
+            <input type="text" placeholder="Enter location" />
+            <button class="go-btn">GO</button>
+            <button class="my-location">My Location</button>
+        </div>
+
+        <div class="div">
+            <h2 class="marker-title">Shows selected location</h2>
+            <button class="copy-url">Copy Location</button>
+        </div>
+
+        <div class="location-table">
+            <ul>
+                <li>
+                    <h3>Stav's Home</h3>
+                    <p>Created at: 10:50</p>
+                    <button>Go</button>
+                    <button>DELETE</button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- MAP -->
+        <div id="map" style="width: 100%; height: 400px;"></div>
+        <!-- <button class="btn">Click Me</button> -->
+
+        <!-- WEATHER -->
+        <div class="weather-box">
+
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer>
+        coffeerights 2020&copy Idan & Stav
+    </footer>
+
     <script type="module" src="js/main.js"></script>
 </body>
+
 </html>

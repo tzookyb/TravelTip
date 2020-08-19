@@ -1,3 +1,5 @@
+'use strict'
+
 console.log('Main!');
 
 import { locService } from './services/loc.service.js'
@@ -15,17 +17,28 @@ window.onload = () => {
         })
         .catch(console.log('INIT MAP ERROR'));
 
-    locService.getPosition()
-        .then(pos => {
+    // locService.getPosition()
+    //     .then(pos => {
 
-            console.log('User position is:', pos.coords);
+    //         console.log('User position is:', pos.coords);
+    //     })
+    //     .catch(err => {
+    //         console.log('Cannot get user-position', err);
+    //     })
+}
+
+// document.querySelector('.btn').addEventListener('click', (ev) => {
+//     console.log('Aha!', ev.target);
+//     mapService.panTo(35.6895, 139.6917);
+// })
+
+document.querySelector('.my-location').addEventListener('click', () => {
+    locService.getPosition()
+        .then((position) => {
+            const { latitude, longitude } = position.coords;
+            mapService.panTo(latitude,longitude);
         })
         .catch(err => {
             console.log('Cannot get user-position', err);
         })
-}
-
-document.querySelector('.btn').addEventListener('click', (ev) => {
-    console.log('Aha!', ev.target);
-    mapService.panTo(35.6895, 139.6917);
 })
