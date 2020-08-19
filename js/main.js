@@ -17,7 +17,7 @@ window.onload = () => {
 function addEventListeners() {
     // EVENT FOR GETTING USER LOCATION
     document.querySelector('.my-location').addEventListener('click', () => {
-        getPosition()
+        mapService.getPosition()
             .then((position) => {
                 const { latitude, longitude } = position.coords;
                 mapController.panTo(latitude, longitude);
@@ -51,5 +51,5 @@ function addEventListeners() {
     }
 
     // EVENT FOR SEARCH BUTTON
-    document.querySelector('.go-btn').onclick = () => {mapController.onSearchLocation()};
+    document.querySelector('.go-btn').onclick = () => { mapController.onSearchLocation() };
 }
