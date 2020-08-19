@@ -1,4 +1,5 @@
-
+// Idan API KEY AIzaSyDd9KipmgPk6pAvx9HUICBglcd27bt-KlU
+// 
 export const mapService = {
     initMap,
     addMarker,

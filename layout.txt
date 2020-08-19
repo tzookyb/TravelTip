@@ -1,0 +1,15 @@
+Layout:
+
+1) h1 - title 				.title
+2) search-bar{				.search-bar
+	Enter location input		.search-bar input
+	GO button			.search-bar .go-btn
+	my-location: gets your location	.search-bar .location-btn
+
+3) h2 - shows current location		.marker-title
+
+4) copy location - copy url link to clipboard .copy-url
+
+4) map 					#map
+
+6) weather - optional	.weather-box
