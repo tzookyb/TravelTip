@@ -8,7 +8,6 @@ export const mapService = {
     removeLocation,
     addPlace,
     geocodeSearch,
-
 }
 
 // createLocation('stav', 10, 15), createLocation('Idan', 122, 15)
@@ -21,12 +20,15 @@ const API_KEY = 'AIzaSyDd9KipmgPk6pAvx9HUICBglcd27bt-KlU';
 
 function getLocs() {
     return new Promise((resolve, reject) => {
+        if (localStorage[LOCS_KEY]===2) {
+            // locs = _loadLocsFromStorage()
+        }
         resolve(locs);
     });
 }
 
 function addPlace(pos, marker, isFromSearch) {
-    debugger
+
     const name = prompt('what is the name of the place?');
     let location;
     if (isFromSearch) {
@@ -35,6 +37,7 @@ function addPlace(pos, marker, isFromSearch) {
         location = createLocation(name, pos.lat(), pos.lng(), marker)
     }
     locs.push(location)
+    // _saveLocsToStorage()
     return Promise.resolve();
 }
 
@@ -88,14 +91,20 @@ function removeLocation(id) {
         }
         else {
             locs.splice(idx, 1);
+            // _saveLocsToStorage()
             return resolve();
         }
     }
     )
 }
 
+
 function _saveLocsToStorage() {
-    storageService.save(LOCS_KEY, locs)
+    let locsCopy = Object.assign({}, locs);
+    // turnToSaveFormat(locsCopy)
+    storageService.save(LOCS_KEY, locsCopy)
+    // turnToRegularFormat(locs)
+    // console.log(localStorage);
 }
 
 function _loadLocsFromStorage() {
@@ -114,3 +123,4 @@ function geocodeSearch(location) {
             )
     })
 }
+

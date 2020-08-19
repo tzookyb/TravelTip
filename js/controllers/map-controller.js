@@ -9,6 +9,7 @@ export const mapController = {
     removeMarker,
 }
 
+var markers = []
 var map;
 
 
@@ -27,9 +28,6 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 onAddPlace(event.latLng, currMarker);
             })
 
-            // map.addListener("click", event => {
-            //     addMarker(event.latLng);
-            // })
 
 
         })
@@ -41,6 +39,9 @@ function addMarker(loc) {
         position: loc,
         map: map,
     });
+    markers.push(marker)
+    
+    
     return marker;
 }
 
@@ -110,3 +111,7 @@ function removeMarker(id) {
             currLoc.marker.setMap(null)
         });
 }
+
+
+
+
