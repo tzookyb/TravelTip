@@ -9,6 +9,7 @@ export const mapController = {
 
 var map;
 
+
 function initMap(lat = 32.0749831, lng = 34.9120554) {
     return _connectGoogleApi()
         .then(() => {
@@ -18,13 +19,21 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 zoom: 15
             })
 
-            map.addListener('click', ev => {
-                onAddPlace(ev.latLng);
-            });
+            map.addListener('click', event => {
+                let currMarker = addMarker(event.latLng);
+                onAddPlace(event.latLng, currMarker);
+            })
+
+            // map.addListener("click", event => {
+            //     addMarker(event.latLng);
+            // })
+            
+            
         })
 }
 
 function addMarker(loc) {
+    
     var marker = new google.maps.Marker({
         position: loc,
         map: map,
@@ -69,8 +78,8 @@ function renderLocationTable() {
     })
 }
 
-function onAddPlace(latLng) {
-    mapService.addPlace(latLng)
-    
+function onAddPlace(latLng, marker) {
+    mapService.addPlace(latLng, marker)
+
 
 }
