@@ -1,6 +1,6 @@
 export const locService = {
-    getLocs: getLocs,
-    getPosition: getPosition
+    getLocs,
+    getPosition,
 }
 var locs = [{ lat: 11.22, lng: 22.11 }]
 

@@ -29,5 +29,5 @@ Stav:
 3)
 
 Idan:
-1)Geolocation
-2)render Locations on table
+1)render Locations on table
+2)Geolocation
