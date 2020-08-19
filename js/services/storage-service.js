@@ -1,3 +1,8 @@
+export const storageService = {
+    saveToStorage,
+    loadFromStorage,
+}
+
 function saveToStorage(key, data) {
     const data = JSON.stringify(data);
     localStorage.setItem(key, data);

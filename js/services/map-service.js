@@ -1,3 +1,5 @@
+// import { storageService } from './storage-service'
+
 export const mapService = {
     getLocs,
     getPosition,
@@ -7,13 +9,15 @@ export const mapService = {
     addPlace,
     getLoc
 }
+
+var LOCS_KEY = 'KEY'
 // createLocation('stav', 10, 15), createLocation('Idan', 122, 15)
-var locs = []
+var gLocs = []
 
 function getLocs() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve(locs);
+            resolve(gLocs);
         }, 2000)
     });
 }
@@ -21,8 +25,8 @@ function getLocs() {
 function addPlace(pos, marker) {
     let name = prompt('what is the name of the place?')
     let location = createLocation(name, pos.lat(), pos.lng(), marker)
-    locs.push(location)
-    console.log("addPlace -> locs", locs)
+    gLocs.push(location)
+    console.log("addPlace -> locs", gLocs)
     
     
      
@@ -59,7 +63,7 @@ function makeId(length = 6) {
 
 function getLocationById(id) {
     return Promise.resolve(
-        locs.find(location => {
+        gLocs.find(location => {
             return location.id === id;
         }))
 }
@@ -67,7 +71,7 @@ function getLocationById(id) {
 function removeLocation(id) {
     return new Promise((resolve, reject) => {
 
-        const idx = locs.findIndex(location => {
+        const idx = gLocs.findIndex(location => {
             return location.id === id;
         })
 
@@ -77,7 +81,7 @@ function removeLocation(id) {
             return reject(`Id: ${id} Not found in data.`);
         }
         else {
-            locs.splice(idx, 1);
+            gLocs.splice(idx, 1);
             return resolve();
         }
     }
@@ -86,8 +90,16 @@ function removeLocation(id) {
 
 
 function getLoc(id) {
-    const loc = locs.find(location => {
+    const loc = gLocs.find(location => {
         return location.id === id;
     })
     return loc
+}
+
+function _saveLocsToStorage() {
+    storageService.saveToStorage(LOCS_KEY, gLocs)
+}
+
+function _loadLocsFromStorage() {
+    return storageService.loadFromStorage(LOCS_KEY)
 }
