@@ -3,7 +3,7 @@ export const locService = {
     getPosition: getPosition
 }
 
-var locs = [{ lat: 11.22, lng: 22.11 }]
+var locs = [createLocation('stav', 10, 15), createLocation('Idan', 122, 15)]
 
 function getLocs() {
     return new Promise((resolve, reject) => {
