@@ -25,15 +25,20 @@ function getLocs() {
     });
 }
 
-function addPlace(pos, marker) {
-    let name = prompt('what is the name of the place?')
-    let location = createLocation(name, pos.lat(), pos.lng(), marker)
+function addPlace(pos, marker, isFromSearch) {
+    debugger
+    const name = prompt('what is the name of the place?');
+    let location;
+    if (isFromSearch) {
+        location = createLocation(name, pos.lat, pos.lng, marker);
+    } else {
+        location = createLocation(name, pos.lat(), pos.lng(), marker)
+    }
     locs.push(location)
-    console.log("addPlace -> locs", locs)
-
+    return Promise.resolve();
 }
 
-export function getPosition() {
+function getPosition() {
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject)
     })
@@ -89,9 +94,6 @@ function removeLocation(id) {
     )
 }
 
-
-
-
 function _saveLocsToStorage() {
     storageService.save(LOCS_KEY, locs)
 }
@@ -106,7 +108,7 @@ function geocodeSearch(location) {
         fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(location)}&key=${API_KEY}`)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                console.log(data)
                 resolve(data.results[0].geometry.location);
             }
             )

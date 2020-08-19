@@ -23,6 +23,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 
             map.addListener('click', event => {
                 let currMarker = addMarker(event.latLng);
+                console.log("initMap -> event", event)
                 onAddPlace(event.latLng, currMarker);
             })
 
@@ -39,7 +40,6 @@ function addMarker(loc) {
     var marker = new google.maps.Marker({
         position: loc,
         map: map,
-        title: 'Hello World!'
     });
     return marker;
 }
@@ -85,17 +85,21 @@ function convertToHumanTime(timestamp) {
     return `${d.getHours()}:${d.getMinutes()} ${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()})`;
 }
 
-function onAddPlace(latLng, marker) {
-    mapService.addPlace(latLng, marker)
-    renderLocationTable()
+function onAddPlace(latLng, marker, isFromSearch = false) {
+    mapService.addPlace(latLng, marker, isFromSearch)
+        .then(renderLocationTable());
 }
 
 function onSearchLocation() {
     const location = document.querySelector('.search-bar input').value;
     mapService.geocodeSearch(location)
         .then(location => {
-            console.log(location);
             panTo(location.lat, location.lng)
+            return location;
+        })
+        .then((location) => {
+            let currMarker = addMarker(location);
+            onAddPlace(location, currMarker, true);
         })
         .catch((error) => console.log('search error:', error));
 }
