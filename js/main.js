@@ -1,5 +1,5 @@
-import { locService } from './services/loc.service.js'
-import { mapService } from './services/map.service.js'
+import { locService } from './controllers/loc-controller'
+import { mapService } from './controllers/map-controller'
 import {locController} from './controllers/loc-controller.js'
 
 

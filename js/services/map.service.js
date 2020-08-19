@@ -1,48 +1,51 @@
-export const mapService = {
-    initMap,
-    addMarker,
-    panTo
-}
-var map;
-
-export function initMap(lat = 32.0749831, lng = 34.9120554) {
-    return _connectGoogleApi()
-        .then(() => {
-            map = new google.maps.Map(
-                document.querySelector('#map'), {
-                center: { lat, lng },
-                zoom: 15
-            })
-        })
+export const locService = {
+    getLocs,
+    getPosition,
+    createLocation,
 }
 
-function addMarker(loc) {
-    var marker = new google.maps.Marker({
-        position: loc,
-        map: map,
-        title: 'Hello World!'
+var locs = [createLocation('stav', 10, 15), createLocation('Idan', 122, 15)]
+
+function getLocs() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(locs);
+        }, 2000)
     });
-    return marker;
 }
 
-function panTo(lat, lng) {
-    var laLatLng = new google.maps.LatLng(lat, lng);
-    map.panTo(laLatLng);
-}
 
-function _connectGoogleApi() {
-    if (window.google) return Promise.resolve()
-    const API_KEY = 'AIzaSyDd9KipmgPk6pAvx9HUICBglcd27bt-KlU'; 
-    var elGoogleApi = document.createElement('script');
-    elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
-    elGoogleApi.async = true;
-    document.body.append(elGoogleApi);
+function getPosition() {
+    console.log('Getting Pos');
 
     return new Promise((resolve, reject) => {
-        elGoogleApi.onload = resolve;
-        elGoogleApi.onerror = () => reject('Google script failed to load')
+        navigator.geolocation.getCurrentPosition(resolve, reject)
     })
 }
 
 
 
+function createLocation(name, lat, lng) {
+    return {
+        id: makeId(),
+        name,
+        lat,
+        lng,
+        weather: null,
+        createdAt: Date.now()
+    }
+}
+
+
+
+
+function makeId(length = 6) {
+    var txt = '';
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    for (var i = 0; i < length; i++) {
+        txt += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
+    return txt;
+}
