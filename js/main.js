@@ -1,6 +1,7 @@
 import { mapController } from './controllers/map-controller.js'
 import { mapService } from './services/map-service.js'
 
+
 // ONLOAD FUNCTION:
 window.onload = () => {
     mapController.renderLocationTable();
@@ -9,7 +10,6 @@ window.onload = () => {
         .then(() => {
             mapController.addMarker({ lat: 32.0749831, lng: 34.9120554 });
         })
-        .catch(console.log('INIT MAP ERROR'));
 
     addEventListeners()
 }
@@ -23,7 +23,6 @@ function addEventListeners() {
                 mapController.panTo(latitude, longitude);
             })
             .catch(err => {
-                console.log('Cannot get user-position', err);
             })
     })
 
@@ -39,8 +38,10 @@ function addEventListeners() {
                     })
             }
             else if (btn.innerText === 'Remove') {
+                mapController.removeMarker(btn.dataset.id)
+
                 mapService.removeLocation(btn.dataset.id)
-                    .then(mapController.renderLocationTable())
+                    .then(mapController.renderLocationTable)
                     .catch((error) => {
                         console.log('unable to delete location', error)
                     }

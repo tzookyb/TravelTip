@@ -6,9 +6,11 @@ export const mapController = {
     panTo,
     renderLocationTable,
     onSearchLocation,
+    removeMarker,
 }
 
 var map;
+
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
     return _connectGoogleApi()
@@ -19,13 +21,21 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 zoom: 15
             })
 
-            map.addListener('click', ev => {
-                onAddPlace(ev.latLng);
-            });
+            map.addListener('click', event => {
+                let currMarker = addMarker(event.latLng);
+                onAddPlace(event.latLng, currMarker);
+            })
+
+            // map.addListener("click", event => {
+            //     addMarker(event.latLng);
+            // })
+
+
         })
 }
 
 function addMarker(loc) {
+
     var marker = new google.maps.Marker({
         position: loc,
         map: map,
@@ -75,10 +85,9 @@ function convertToHumanTime(timestamp) {
     return `${d.getHours()}:${d.getMinutes()} ${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()})`;
 }
 
-function onAddPlace(latLng) {
-    mapService.addPlace(latLng)
-
-
+function onAddPlace(latLng, marker) {
+    mapService.addPlace(latLng, marker)
+    renderLocationTable()
 }
 
 function onSearchLocation() {
@@ -89,4 +98,11 @@ function onSearchLocation() {
             panTo(location.lat, location.lng)
         })
         .catch((error) => console.log('search error:', error));
+}
+
+function removeMarker(id) {
+    mapService.getLocationById(id)
+        .then(currLoc => {
+            currLoc.marker.setMap(null)
+        });
 }

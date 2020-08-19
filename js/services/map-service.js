@@ -6,10 +6,13 @@ export const mapService = {
     removeLocation,
     addPlace,
     geocodeSearch,
+    
 }
 
 const API_KEY = 'AIzaSyDd9KipmgPk6pAvx9HUICBglcd27bt-KlU';
-var locs = [createLocation('stav', 10, 15), createLocation('Idan', 122, 15)]
+var locs = []
+
+// createLocation('stav', 10, 15), createLocation('Idan', 122, 15)
 
 function getLocs() {
     return new Promise((resolve, reject) => {
@@ -19,13 +22,11 @@ function getLocs() {
     });
 }
 
-function addPlace(pos) {
+function addPlace(pos, marker) {
     let name = prompt('what is the name of the place?')
-    let location = createLocation(name, pos.lat(), pos.lng())
+    let location = createLocation(name, pos.lat(), pos.lng(), marker)
     locs.push(location)
     console.log("addPlace -> locs", locs)
-
-
 }
 
 export function getPosition() {
@@ -34,14 +35,15 @@ export function getPosition() {
     })
 }
 
-function createLocation(name, lat, lng) {
+function createLocation(name, lat, lng, marker = null) {
     return {
         id: makeId(),
         name,
         lat,
         lng,
         weather: null,
-        createdAt: Date.now()
+        createdAt: Date.now(),
+        marker
     }
 }
 
