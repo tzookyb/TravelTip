@@ -1,5 +1,5 @@
 import { mapController } from './controllers/map-controller.js'
-import { getPosition } from './services/map-service.js'
+import { mapService } from './services/map-service.js'
 
 
 // ONLOAD FUNCTION:
@@ -15,6 +15,7 @@ window.onload = () => {
 }
 
 function addEventListeners() {
+    // EVENT FOR GETTING USER LOCATION
     document.querySelector('.my-location').addEventListener('click', () => {
         getPosition()
             .then((position) => {
@@ -24,4 +25,26 @@ function addEventListeners() {
             .catch(err => {
             })
     })
+
+    // EVENTS FOR LOCATION BUTTONS
+    document.querySelector('.location-table ul').onclick = (ev) => {
+
+        if (ev.target.tagName === 'BUTTON') {
+            var btn = ev.target;
+            if (btn.innerText === 'Go') {
+                mapService.getLocationById(btn.dataset.id)
+                    .then((location) => {
+                        mapController.panTo(location.lat, location.lng);
+                    })
+            }
+            else if (btn.innerText === 'Remove') {
+                mapService.removeLocation(btn.dataset.id)
+                    .then(mapController.renderLocationTable())
+                    .catch((error) => {
+                        console.log('unable to delete location', error)
+                    }
+                    )
+            }
+        }
+    }
 }
