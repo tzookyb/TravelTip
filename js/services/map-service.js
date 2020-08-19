@@ -2,7 +2,8 @@ export const mapService = {
     getLocs,
     getPosition,
     createLocation,
-    getHumanTime,
+    getLocationById,
+    removeLocation,
 }
 
 var locs = [createLocation('stav', 10, 15), createLocation('Idan', 122, 15)]
@@ -43,6 +44,29 @@ function makeId(length = 6) {
     return txt;
 }
 
-function getHumanTime(timestamp){
-    
+function getLocationById(id) {
+    return Promise.resolve(
+        locs.find(location => {
+            return location.id === id;
+        }))
+}
+
+function removeLocation(id) {
+    return new Promise((resolve, reject) => {
+
+        const idx = locs.findIndex(location => {
+            return location.id === id;
+        })
+
+
+        if (idx === -1) {
+            console.log();
+            return reject(`Id: ${id} Not found in data.`);
+        }
+        else {
+            locs.splice(idx, 1);
+            return resolve();
+        }
+    }
+    )
 }

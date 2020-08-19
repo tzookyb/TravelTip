@@ -55,12 +55,18 @@ function renderLocationTable() {
             return `
             <li>
             <h4>${location.name}</h4>
-            <p>${mapService.getHumanTime(location.createdAt)}</p>
+            <p>Created at: </p>
             <button data-id="${location.id}">Go</button>
             <button data-id="${location.id}">Remove</button>
             </li>
             `
-        })
-        document.querySelector('.location-table ul').innerHTML = strHTML;
+        });
+        document.querySelector('.location-table ul').innerHTML = strHTML.join('');
     })
+}
+
+function convertToHumanTime(timestamp) {
+    console.log(timestamp);
+    return `${timestamp.getHours()}`
+    // :${timestamp.getMinutes()} ${timestamp.getDate()}/${timestamp.getMonth() + 1}/${timestamp.getFullYear()})`;
 }
