@@ -61,10 +61,15 @@ function addEventListeners() {
     // EVENT FOR COPY TO URL BUTTON
     document.querySelector('.copy-url').onclick = () => { mapController.copyUrlToClipboard() };
 
+    // EVENT FOR OPENING LOCATIONS TABLE
+    document.querySelector('.showlist').onclick = () => {
+        document.querySelector('.location-table').classList.add('show');
+        document.querySelector('.screen').classList.add('show');
+    };
+    //EVENT FOR CLOSING SCREEN
+    document.querySelector('.screen').onclick = () => {
+        document.querySelector('.location-table').classList.remove('show');
+        document.querySelector('.screen').classList.remove('show');
 
+    }
 }
-
-
-
-
-
