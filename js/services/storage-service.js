@@ -4,7 +4,7 @@ export const storageService = {
 }
 
 function save(key, data) {
-    const data = JSON.stringify(data);
+    data = JSON.stringify(data);
     localStorage.setItem(key, data);
 }
 

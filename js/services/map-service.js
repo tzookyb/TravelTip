@@ -1,4 +1,4 @@
-// import { storageService } from './storage-service'
+import { storageService } from './storage-service.js'
 
 export const mapService = {
     getLocs,
@@ -8,7 +8,7 @@ export const mapService = {
     removeLocation,
     addPlace,
     geocodeSearch,
-    
+
 }
 
 // createLocation('stav', 10, 15), createLocation('Idan', 122, 15)
@@ -21,9 +21,7 @@ const API_KEY = 'AIzaSyDd9KipmgPk6pAvx9HUICBglcd27bt-KlU';
 
 function getLocs() {
     return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(locs);
-        }, 2000)
+        resolve(locs);
     });
 }
 
@@ -32,7 +30,7 @@ function addPlace(pos, marker) {
     let location = createLocation(name, pos.lat(), pos.lng(), marker)
     locs.push(location)
     console.log("addPlace -> locs", locs)
-    
+
 }
 
 export function getPosition() {
