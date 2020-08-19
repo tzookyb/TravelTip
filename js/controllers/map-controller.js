@@ -1,11 +1,15 @@
-export const mapService = {
+import { mapService } from '../services/map-service.js'
+
+export const mapController = {
     initMap,
     addMarker,
-    panTo
+    panTo,
+    renderLocationTable,
 }
+
 var map;
 
-export function initMap(lat = 32.0749831, lng = 34.9120554) {
+function initMap(lat = 32.0749831, lng = 34.9120554) {
     return _connectGoogleApi()
         .then(() => {
             map = new google.maps.Map(
@@ -32,7 +36,7 @@ function panTo(lat, lng) {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    const API_KEY = 'AIzaSyDd9KipmgPk6pAvx9HUICBglcd27bt-KlU'; 
+    const API_KEY = 'AIzaSyDd9KipmgPk6pAvx9HUICBglcd27bt-KlU';
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
@@ -44,5 +48,19 @@ function _connectGoogleApi() {
     })
 }
 
-
-
+function renderLocationTable() {
+    var strHTML;
+    mapService.getLocs().then(locations => {
+        strHTML = locations.map(location => {
+            return `
+            <li>
+            <h4>${location.name}</h4>
+            <p>${mapService.getHumanTime(location.createdAt)}</p>
+            <button data-id="${location.id}">Go</button>
+            <button data-id="${location.id}">Remove</button>
+            </li>
+            `
+        })
+        document.querySelector('.location-table ul').innerHTML = strHTML;
+    })
+}

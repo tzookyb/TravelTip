@@ -1,7 +1,8 @@
-export const locService = {
+export const mapService = {
     getLocs,
     getPosition,
     createLocation,
+    getHumanTime,
 }
 
 var locs = [createLocation('stav', 10, 15), createLocation('Idan', 122, 15)]
@@ -14,16 +15,11 @@ function getLocs() {
     });
 }
 
-
-function getPosition() {
-    console.log('Getting Pos');
-
+export function getPosition() {
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject)
     })
 }
-
-
 
 function createLocation(name, lat, lng) {
     return {
@@ -36,9 +32,6 @@ function createLocation(name, lat, lng) {
     }
 }
 
-
-
-
 function makeId(length = 6) {
     var txt = '';
     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -48,4 +41,8 @@ function makeId(length = 6) {
     }
 
     return txt;
+}
+
+function getHumanTime(timestamp){
+    
 }

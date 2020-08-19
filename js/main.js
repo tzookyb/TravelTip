@@ -1,29 +1,28 @@
-import { locService } from './controllers/loc-controller'
-import { mapService } from './controllers/map-controller'
-import {locController} from './controllers/loc-controller.js'
+import { mapController } from './controllers/map-controller.js'
+import { getPosition } from './services/map-service.js'
 
-
-
+// ONLOAD FUNCTION:
 window.onload = () => {
-    
-    locController.renderLocationTable();
+    mapController.renderLocationTable();
 
-    mapService.initMap()
+    mapController.initMap()
         .then(() => {
-            mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
+            mapController.addMarker({ lat: 32.0749831, lng: 34.9120554 });
         })
         .catch(console.log('INIT MAP ERROR'));
+
+    addEventListeners()
 }
 
-
-// Function for getting user's location
-document.querySelector('.my-location').addEventListener('click', () => {
-    locService.getPosition()
-        .then((position) => {
-            const { latitude, longitude } = position.coords;
-            mapService.panTo(latitude, longitude);
-        })
-        .catch(err => {
-            console.log('Cannot get user-position', err);
-        })
-})
+function addEventListeners() {
+    document.querySelector('.my-location').addEventListener('click', () => {
+        getPosition()
+            .then((position) => {
+                const { latitude, longitude } = position.coords;
+                mapController.panTo(latitude, longitude);
+            })
+            .catch(err => {
+                console.log('Cannot get user-position', err);
+            })
+    })
+}
