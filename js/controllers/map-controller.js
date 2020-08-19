@@ -42,8 +42,6 @@ function addMarker(loc) {
         map: map,
     });
     markers.push(marker)
-    
-    
     return marker;
 }
 
@@ -123,3 +121,5 @@ function checkURLQuery() {
         panTo(lat, lng);
     }
 }
+
+

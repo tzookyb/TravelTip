@@ -5,7 +5,7 @@ import { mapService } from './services/map-service.js'
 // ONLOAD FUNCTION:
 window.onload = () => {
     mapController.renderLocationTable();
-
+    document.execCommand('copy')
     mapController.initMap()
         .then(() => {
             mapController.addMarker({ lat: 32.0749831, lng: 34.9120554 });
@@ -52,3 +52,16 @@ function addEventListeners() {
     // EVENT FOR SEARCH BUTTON
     document.querySelector('.go-btn').onclick = () => { mapController.onSearchLocation() };
 }
+
+
+function setClipboard(text) {
+    let data = [new ClipboardItem({ "text/plain": text })];
+
+    navigator.clipboard.write(data).then(function () {
+        /* success */
+    }, function () {
+        /* failure */
+    });
+}
+
+setClipboard('sdsdsd')
