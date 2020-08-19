@@ -107,7 +107,6 @@ function geocodeSearch(location) {
         fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(location)}&key=${API_KEY}`)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 resolve(data.results[0].geometry.location);
             }
             )

@@ -74,7 +74,7 @@ function renderLocationTable() {
             <li>
             <h4>${location.name}</h4>
             <p>Created at: ${convertToHumanTime(location.createdAt)}</p>
-            <button data-id="${location.id}">Go</button>
+            <button class="loc-go" data-id="${location.id}">Go</button>
             <button data-id="${location.id}">Remove</button>
             </li>
             `
@@ -139,3 +139,10 @@ function copyUrlToClipboard() {
     document.execCommand('copy');
     document.body.removeChild(elem);
 }
+
+
+
+
+
+
+

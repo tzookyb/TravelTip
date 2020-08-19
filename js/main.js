@@ -25,6 +25,10 @@ function addEventListeners() {
             .catch(err => { })
     })
 
+
+
+
+
     // EVENTS FOR LOCATION BUTTONS
     document.querySelector('.location-table ul').onclick = (ev) => {
 
@@ -33,8 +37,9 @@ function addEventListeners() {
             if (btn.innerText === 'Go') {
                 mapService.getLocationById(btn.dataset.id)
                     .then((location) => {
-                        mapController.panTo(location.lat, location.lng)
-                            .then()
+                        console.log("document.querySelector -> location", location)
+                        document.querySelector('.marker-title').innerText = location.name;
+
                     })
             }
             else if (btn.innerText === 'Remove') {
@@ -55,17 +60,11 @@ function addEventListeners() {
 
     // EVENT FOR COPY TO URL BUTTON
     document.querySelector('.copy-url').onclick = () => { mapController.copyUrlToClipboard() };
+
+
 }
 
 
-function setClipboard(text) {
-    let data = [new ClipboardItem({ "text/plain": text })];
 
-    navigator.clipboard.write(data).then(function () {
-        /* success */
-    }, function () {
-        /* failure */
-    });
-}
 
-setClipboard('sdsdsd')
+
