@@ -17,6 +17,10 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 center: { lat, lng },
                 zoom: 15
             })
+
+            map.addListener('click', ev => {
+                onAddPlace(ev.latLng);
+            });
         })
 }
 
@@ -69,4 +73,10 @@ function convertToHumanTime(timestamp) {
     console.log(timestamp);
     return `${timestamp.getHours()}`
     // :${timestamp.getMinutes()} ${timestamp.getDate()}/${timestamp.getMonth() + 1}/${timestamp.getFullYear()})`;
+}
+
+function onAddPlace(latLng) {
+    mapService.addPlace(latLng)
+
+
 }
