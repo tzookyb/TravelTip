@@ -1,6 +1,7 @@
 export const locService = {
-    getLocs: getLocs,
-    getPosition: getPosition
+    getLocs,
+    getPosition,
+    createLocation,
 }
 
 var locs = [createLocation('stav', 10, 15), createLocation('Idan', 122, 15)]
