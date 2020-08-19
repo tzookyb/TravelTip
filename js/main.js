@@ -10,8 +10,8 @@ window.onload = () => {
         .then(() => {
             mapController.addMarker({ lat: 32.0749831, lng: 34.9120554 });
         })
-
-    addEventListeners()
+        .then(() => { mapController.checkURLQuery() });
+    addEventListeners();
 }
 
 function addEventListeners() {
@@ -22,8 +22,7 @@ function addEventListeners() {
                 const { latitude, longitude } = position.coords;
                 mapController.panTo(latitude, longitude);
             })
-            .catch(err => {
-            })
+            .catch(err => { })
     })
 
     // EVENTS FOR LOCATION BUTTONS

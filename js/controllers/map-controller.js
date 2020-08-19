@@ -7,6 +7,7 @@ export const mapController = {
     renderLocationTable,
     onSearchLocation,
     removeMarker,
+    checkURLQuery,
 }
 
 var markers = []
@@ -19,7 +20,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             map = new google.maps.Map(
                 document.querySelector('#map'), {
                 center: { lat, lng },
-                zoom: 15
+                zoom: 10
             })
 
             map.addListener('click', event => {
@@ -27,6 +28,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 console.log("initMap -> event", event)
                 onAddPlace(event.latLng, currMarker);
             })
+            
 
 
 
@@ -112,6 +114,12 @@ function removeMarker(id) {
         });
 }
 
-
-
-
+function checkURLQuery() {
+    // window.location.href
+    const urlParams = new URLSearchParams(window.location.search);
+    const lat = urlParams.get('lat');
+    const lng = urlParams.get('lng');
+    if (lat && lng) {
+        panTo(lat, lng);
+    }
+}
