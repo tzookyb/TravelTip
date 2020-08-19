@@ -1,5 +1,3 @@
-// import { storageService } from './storage-service'
-
 export const mapService = {
     getLocs,
     getPosition,
@@ -11,24 +9,17 @@ export const mapService = {
 
 }
 
-// createLocation('stav', 10, 15), createLocation('Idan', 122, 15)
 var LOCS_KEY = 'KEY'
 var locs = []
 const API_KEY = 'AIzaSyDd9KipmgPk6pAvx9HUICBglcd27bt-KlU';
 
-
-// createLocation('stav', 10, 15), createLocation('Idan', 122, 15)
-
 function getLocs() {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(locs);
-        }, 2000)
+    return new Promise((resolve) => {
+        resolve(locs);
     });
 }
 
 function addPlace(pos, marker, isFromSearch) {
-    debugger
     const name = prompt('what is the name of the place?');
     let location;
     if (isFromSearch) {
