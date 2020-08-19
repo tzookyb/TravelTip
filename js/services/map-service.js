@@ -7,17 +7,22 @@ export const mapService = {
     getLocationById,
     removeLocation,
     addPlace,
-    getLoc
+    geocodeSearch,
+    
 }
 
-var LOCS_KEY = 'KEY'
 // createLocation('stav', 10, 15), createLocation('Idan', 122, 15)
-var gLocs = []
+var LOCS_KEY = 'KEY'
+var locs = []
+const API_KEY = 'AIzaSyDd9KipmgPk6pAvx9HUICBglcd27bt-KlU';
+
+
+// createLocation('stav', 10, 15), createLocation('Idan', 122, 15)
 
 function getLocs() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve(gLocs);
+            resolve(locs);
         }, 2000)
     });
 }
@@ -25,11 +30,9 @@ function getLocs() {
 function addPlace(pos, marker) {
     let name = prompt('what is the name of the place?')
     let location = createLocation(name, pos.lat(), pos.lng(), marker)
-    gLocs.push(location)
-    console.log("addPlace -> locs", gLocs)
+    locs.push(location)
+    console.log("addPlace -> locs", locs)
     
-    
-     
 }
 
 export function getPosition() {
@@ -38,7 +41,7 @@ export function getPosition() {
     })
 }
 
-function createLocation(name, lat, lng, marker=null) {
+function createLocation(name, lat, lng, marker = null) {
     return {
         id: makeId(),
         name,
@@ -63,7 +66,7 @@ function makeId(length = 6) {
 
 function getLocationById(id) {
     return Promise.resolve(
-        gLocs.find(location => {
+        locs.find(location => {
             return location.id === id;
         }))
 }
@@ -71,7 +74,7 @@ function getLocationById(id) {
 function removeLocation(id) {
     return new Promise((resolve, reject) => {
 
-        const idx = gLocs.findIndex(location => {
+        const idx = locs.findIndex(location => {
             return location.id === id;
         })
 
@@ -81,7 +84,7 @@ function removeLocation(id) {
             return reject(`Id: ${id} Not found in data.`);
         }
         else {
-            gLocs.splice(idx, 1);
+            locs.splice(idx, 1);
             return resolve();
         }
     }
@@ -89,17 +92,25 @@ function removeLocation(id) {
 }
 
 
-function getLoc(id) {
-    const loc = gLocs.find(location => {
-        return location.id === id;
-    })
-    return loc
-}
+
 
 function _saveLocsToStorage() {
-    storageService.saveToStorage(LOCS_KEY, gLocs)
+    storageService.save(LOCS_KEY, locs)
 }
 
 function _loadLocsFromStorage() {
-    return storageService.loadFromStorage(LOCS_KEY)
+    return storageService.load(LOCS_KEY)
+}
+
+
+function geocodeSearch(location) {
+    return new Promise((resolve) => {
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(location)}&key=${API_KEY}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                resolve(data.results[0].geometry.location);
+            }
+            )
+    })
 }
