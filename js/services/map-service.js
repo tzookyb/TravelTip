@@ -3,6 +3,7 @@ export const mapService = {
     getPosition,
     createLocation,
     getHumanTime,
+    addPlace,
 }
 
 var locs = [createLocation('stav', 10, 15), createLocation('Idan', 122, 15)]
@@ -13,6 +14,15 @@ function getLocs() {
             resolve(locs);
         }, 2000)
     });
+}
+
+function addPlace(pos) {
+    let name = prompt('what is the name of the place?')
+    let location = createLocation(name, pos.lat(), pos.lng())
+    locs.push(location)
+    console.log("addPlace -> locs", locs)
+    
+     
 }
 
 export function getPosition() {
@@ -46,3 +56,10 @@ function makeId(length = 6) {
 function getHumanTime(timestamp){
     
 }
+
+
+
+
+
+
+
