@@ -1,14 +1,14 @@
 export const storageService = {
-    saveToStorage,
-    loadFromStorage,
+    save,
+    load,
 }
 
-function saveToStorage(key, data) {
+function save(key, data) {
     const data = JSON.stringify(data);
     localStorage.setItem(key, data);
 }
 
-function loadFromStorage(key) {
+function load(key) {
     var data = localStorage.getItem(key);
     data = JSON.parse(data);
     return data;
